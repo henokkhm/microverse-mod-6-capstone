@@ -1,0 +1,247 @@
+openapi: 3.0.3
+info:
+  title: Executive Workspaces API
+  version: 1.0.0
+
+paths:
+  /api/v1/packages:
+    get:
+      summary: List all packages
+      responses:
+        '200':
+          description: List of packages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Package'
+    post:
+      summary: Create a new package
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackageInput'
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Package'
+
+  /api/v1/packages/{slug}:
+    get:
+      summary: Get a package by slug
+      responses:
+        '200':
+          description: Successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Package'
+    put:
+      summary: Update a package by slug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackageInput'
+      responses:
+        '200':
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Package'
+        '404':
+          description: Package not found
+    delete:
+      summary: Delete a package by slug
+      responses:
+        '204':
+          description: Successfully deleted
+        '422':
+          description: Package not found
+
+  /api/v1/registrations:
+    post:
+      summary: Create a new user registration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+      responses:
+        '201':
+          description: Successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: created
+                  user:
+                    $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+
+  /api/v1/reservations:
+    post:
+      summary: Create a new reservation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationInput'
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+        '422':
+          description: Validation error
+
+  /api/v1/reservations/{id}:
+    delete:
+      summary: Delete a reservation
+      responses:
+        '204':
+          description: Successfully deleted
+        '422':
+          description: Reservation not found
+
+  /api/v1/packages/{package_slug}/reservations:
+    get:
+      summary: List reservations for a package
+      responses:
+        '200':
+          description: List of reservations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+
+components:
+  schemas:
+    Package:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Executive Suite"
+        description:
+          type: string
+          example: "Luxurious executive suite with modern amenities"
+        image_url:
+          type: string
+          example: "https://example.com/executive-suite.jpg"
+        slug:
+          type: string
+          example: "executive-suite"
+        price:
+          type: number
+          example: 1500.00
+
+    PackageInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Executive Suite"
+        description:
+          type: string
+          example: "Luxurious executive suite with modern amenities"
+        image_url:
+          type: string
+          example: "https://example.com/executive-suite.jpg"
+        slug:
+          type: string
+          example: "executive-suite"
+        price:
+          type: number
+          example: 1500.00
+
+    UserRegistration:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            username:
+              type: string
+              example: "john_doe"
+            email:
+              type: string
+              example: "john.doe@example.com"
+            password:
+              type: string
+              example: "password123"
+            password_confirmation:
+              type: string
+              example: "password123"
+            role:
+              type: string
+              enum: ["user", "admin"]
+              example: "user"
+
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        user_id:
+          type: integer
+          example: 123
+        package_id:
+          type: integer
+          example: 456
+        location:
+          type: string
+          example: "Meeting Room A"
+        date:
+          type: string
+          format: date
+          example: "2023-01-01"
+
+    ReservationInput:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 123
+        package_id:
+          type: integer
+          example: 456
+        location:
+          type: string
+          example: "Meeting Room A"
+        date:
+          type: string
+          format: date
+          example: "2023-01-01"
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 123
+        username:
+          type: string
+          example: "john_doe"
+        email:
+          type: string
+          example: "john.doe@example.com"
+        role:
+          type: string
+          enum: ["user", "admin"]
+          example: "user"
