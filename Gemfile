@@ -58,3 +58,9 @@ gem 'active_model_serializers'
 gem 'jwt'
 
 gem 'devise'
+
+gem 'rswag-api'
+
+gem 'rswag-ui'
+
+gem 'swagger-blocks'
