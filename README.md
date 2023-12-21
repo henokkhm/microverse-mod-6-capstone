@@ -31,6 +31,7 @@
 
 The app was bootstrapped using [Create React App](https://github.com/facebook/create-react-app). It also uses [React Router](https://reactrouter.com/en/main) for client-side navigation and [Redux Toolkit](https://redux-toolkit.js.org/) for state management. 
 
+
 - The frontend API for this application can be found [here](https://github.com/henokkhm/workspace-share-frontend-microverse-capstone).
 
 ## Kanban board <a name="Kanban-board"></a>
