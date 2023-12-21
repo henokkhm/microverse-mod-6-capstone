@@ -10,8 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 20_231_213_120_952) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
+  create_table 'admins', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_admins_on_user_id'
+  end
+
+  create_table 'packages', force: :cascade do |t|
+    t.string 'name'
+    t.text 'description'
+    t.decimal 'price'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'slug'
+    t.string 'image_url'
+  end
+
+  create_table 'reservations', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'package_id', null: false
+    t.date 'date'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'location'
+    t.index ['package_id'], name: 'index_reservations_on_package_id'
+    t.index ['user_id'], name: 'index_reservations_on_user_id'
+  end
+
+  create_table 'users', force: :cascade do |t|
+    t.string 'username'
+    t.string 'email'
+    t.string 'password_digest'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'role', default: 0
+  end
+
+  add_foreign_key 'admins', 'users'
+  add_foreign_key 'reservations', 'packages'
+  add_foreign_key 'reservations', 'users'
 end
