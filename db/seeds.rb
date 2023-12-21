@@ -9,9 +9,9 @@ package1 = Package.create(name: 'Basic Package', description: 'Includes basic am
 package2 = Package.create(name: 'Premium Package', description: 'Includes premium amenities', price: 100.00)
 
 # Create reservations
-reservation1 = Reservation.create(user: user1, package: package1, date: Date.today)
-reservation2 = Reservation.create(user: user2, package: package1, date: Date.tomorrow)
-reservation3 = Reservation.create(user: user1, package: package2, date: Date.today + 2.days)
+Reservation.create(user: user1, package: package1, date: Date.today)
+Reservation.create(user: user2, package: package1, date: Date.tomorrow)
+Reservation.create(user: user1, package: package2, date: Date.today + 2.days)
 
 # Create an admin user
 admin_user = User.create(username: 'admin_user', email: 'admin@example.com', password_digest: 'adminpassword')
