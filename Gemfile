@@ -46,3 +46,15 @@ group :development do
 end
 
 gem 'rubocop', '>= 1.0', '< 2.0'
+
+gem 'fast_jsonapi'
+
+gem 'rack-cors', :require => 'rack/cors'
+
+gem 'bcrypt', '~> 3.1', '>= 3.1.20'
+
+gem 'active_model_serializers'
+
+gem 'jwt'
+
+gem 'devise'
