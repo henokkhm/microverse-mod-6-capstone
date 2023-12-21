@@ -16,7 +16,7 @@ module Api
 
       def auto_login
         token = params[:token]
-        user = User.find(JWT.decode(token, "put your secret password here", true, algorithm: 'HS256')[0]["user_id"])
+        user = User.find(JWT.decode(token, 'put your secret password here', true, algorithm: 'HS256')[0]['user_id'])
         render json: user
       end
 
@@ -35,7 +35,7 @@ module Api
 
       def logout
         reset_session
-        render json: {status: 200, logged_out: true}
+        render json: { status: 200, logged_out: true }
       end
 
       private
@@ -43,6 +43,6 @@ module Api
       def user_login_params
         params.require(:user).permit(:email, :password)
       end
-   end
+    end
   end
 end
