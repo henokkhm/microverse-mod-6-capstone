@@ -1,7 +1,7 @@
 require 'jwt'
 
 class JsonWebToken
-  SECRET_KEY = 'your_secret_key_here'.freeze
+  SECRET_KEY = 'your_secret_key_here'
 
   def self.encode(payload, exp = 24.hours.from_now)
     payload[:exp] = exp.to_i

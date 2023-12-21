@@ -26,7 +26,7 @@ default: &default
 
 development:
   <<: *default
-  database: workspace_rails_trail_dev
+  database: workspace_rails_trail_development2
   username: postgres
   password: admin
   # The specified database role being used to connect to postgres.
@@ -61,7 +61,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: workspace_rails_trail_test
+  database: workspace_rails_trail_test2
   username: postgres
   password: admin
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -86,6 +86,6 @@ test:
 #
 production:
   <<: *default
-  database: workspace_rails_trail_prod
+  database: workspace_rails_trail_production2
   username: react_rails_app
   password: <%= ENV["REACT_RAILS_APP_DATABASE_PASSWORD"] %>

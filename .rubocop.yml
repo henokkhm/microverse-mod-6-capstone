@@ -11,7 +11,7 @@ AllCops:
   DisplayCopNames: true
 
 Layout/LineLength:
-  Max: 200
+  Max: 120
 Metrics/MethodLength:
   Include:
     - "app/controllers/*"
@@ -26,7 +26,7 @@ Metrics/ClassLength:
   Max: 150
 Metrics/BlockLength:
   AllowedMethods: ['describe']
-  Max: 40
+  Max: 30
 
 Style/Documentation:
   Enabled: false
@@ -57,10 +57,4 @@ Style/HashEachMethods:
 Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
-  Enabled: false
-Layout/EndOfLine:
-  Enabled: false
-Metrics/CyclomaticComplexity:
-  Enabled: false
-Metrics/PerceivedComplexity:
   Enabled: false
