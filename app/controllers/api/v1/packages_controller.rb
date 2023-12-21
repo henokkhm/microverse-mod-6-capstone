@@ -1,8 +1,8 @@
 module Api
   module V1
     class PackagesController < ApplicationController
-      before_action :set_package, only: [:show, :update, :destroy]
-      before_action :check_admin, only: [:create, :destroy]
+      before_action :set_package, only: %i[show update destroy]
+      before_action :check_admin, only: %i[create destroy]
 
       def index
         packages = Package.all
@@ -47,9 +47,9 @@ module Api
       private
 
       def check_admin
-        unless current_user&.admin?
-          render json: { error: 'Unauthorized' }, status: :unauthorized
-        end
+        return if current_user&.admin?
+
+        render json: { error: 'Unauthorized' }, status: :unauthorized
       end
 
       def package_params
